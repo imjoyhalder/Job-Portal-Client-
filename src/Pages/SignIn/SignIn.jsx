@@ -3,25 +3,26 @@ import Lottie from 'lottie-react';
 import LoginLottieData from '../../assets/Lottie/login.json'
 import AuthContext from '../../Context/AuthContext/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import SocialLogin from '../Shared/SocialLogin';
 
 
 const SignIn = () => {
 
-    const {userLogin} = useContext(AuthContext)
+    const { userLogin } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const handleSignIn = e =>{
+    const handleSignIn = e => {
         e.preventDefault()
         const form = e.target
         const email = form.email.value
         const password = form.password.value
 
-        userLogin(email,password)
-            .then(result =>{
+        userLogin(email, password)
+            .then(result => {
                 console.log("sign in", result.user)
                 navigate('/')
             })
-            .catch(error=>{
+            .catch(error => {
                 console.log(error)
             })
     }
@@ -55,6 +56,12 @@ const SignIn = () => {
                         </div>
                         <div>
                             <Link className='text-gray-400 hover:underline hover:text-blue-600' to='/register'>Don't have an account</Link>
+                        </div>
+                        <div className="divider divider-primary">OR</div>
+                        <div className='flex items-center justify-center'>
+                            {
+                                <SocialLogin></SocialLogin>
+                            }
                         </div>
                     </form>
                 </div>

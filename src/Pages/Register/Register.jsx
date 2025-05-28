@@ -4,6 +4,8 @@ import registerLottieData from '../../assets/Lottie/register.json'
 import AuthContext from '../../Context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import SocialLogin from '../Shared/SocialLogin';
+
 
 const Register = () => {
 
@@ -69,6 +71,12 @@ const Register = () => {
                         </div>
                         <div>
                             <Link to='/login' className='text-gray-400 hover:underline hover:text-blue-600'>Already have an account</Link>
+                        </div>
+                        <div className="divider divider-primary">OR</div>
+                        <div className='flex items-center justify-center'>
+                            {
+                                <SocialLogin></SocialLogin>
+                            }
                         </div>
                     </form>
                 </div>

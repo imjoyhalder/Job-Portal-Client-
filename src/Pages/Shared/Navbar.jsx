@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import AuthContext from '../../Context/AuthContext/AuthContext';
 import jobIcon from '../../assets/Joblogo/icons8-job-application-64.png'
+import { LuLogOut } from "react-icons/lu";
 
 const Navbar = () => {
 
@@ -66,7 +67,7 @@ const Navbar = () => {
             <div className="navbar-end gap-4">
                 {
                     user ? <>
-                        <button onClick={handleLogOut} className='btn'>Sign Out</button>
+                        <button onClick={handleLogOut} className='btn btn-primary'>Sign Out<LuLogOut /></button>
                     </> : <>
                         <Link to='/register' className="btn">Register</Link>
                         <Link to='/login' className="btn">Sign Up</Link>
