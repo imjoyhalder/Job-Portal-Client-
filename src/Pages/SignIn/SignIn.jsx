@@ -1,54 +1,40 @@
-import Lottie from 'lottie-react';
 import React, { useContext } from 'react';
-import registerLottieData from '../../assets/Lottie/register.json'
+import Lottie from 'lottie-react';
+import LoginLottieData from '../../assets/Lottie/login.json'
 import AuthContext from '../../Context/AuthContext/AuthContext';
-import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Register = () => {
 
-    const { createUser } = useContext(AuthContext)
+const SignIn = () => {
 
-    const handleRegister = e => {
+    const {userLogin} = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const handleSignIn = e =>{
         e.preventDefault()
         const form = e.target
         const email = form.email.value
         const password = form.password.value
 
-
-        // password validation; 
-        function isValidPassword(password) {
-            const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
-            return regex.test(password);
-        }
-
-        if (!isValidPassword(password)) {
-            Swal.fire({
-                title: "Error!",
-                text: "Password minimum 6 characters and one digit and one Uppercase letter ",
-                icon: "error"
-            });
-        }
-
-        createUser(email, password)
-            .then(result => {
-                console.log(result.user)
+        userLogin(email,password)
+            .then(result =>{
+                console.log("sign in", result.user)
+                navigate('/')
             })
-            .catch(error => {
+            .catch(error=>{
                 console.log(error)
             })
-
     }
 
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left w-[380px] md:w-[450px]">
-                    <Lottie animationData={registerLottieData}></Lottie>
+                <div className="text-center lg:text-left w-[300px] md:w-[400px]">
+                    <Lottie animationData={LoginLottieData}></Lottie>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <h1 className="ml-8 mt-6 text-5xl font-bold">Register now!</h1>
-                    <form onSubmit={handleRegister} className="card-body">
+                    <h1 className="ml-8 mt-6 text-5xl font-bold">Login Now!</h1>
+                    <form onSubmit={handleSignIn} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -65,10 +51,10 @@ const Register = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Register</button>
+                            <button className="btn btn-primary">Login</button>
                         </div>
                         <div>
-                            <Link to='/login' className='text-gray-400 hover:underline hover:text-blue-600'>Already have an account</Link>
+                            <Link className='text-gray-400 hover:underline hover:text-blue-600' to='/register'>Don't have an account</Link>
                         </div>
                     </form>
                 </div>
@@ -77,4 +63,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default SignIn;

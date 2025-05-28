@@ -1,8 +1,23 @@
 import link from 'daisyui/components/link';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../Context/AuthContext/AuthContext';
 
 const Navbar = () => {
+
+    const { user, userLogout } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const handleLogOut= ()=>{
+        userLogout()
+        .then(res=>{
+            console.log(res)
+            navigate('/')
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
 
     const links = <>
         <li><a>Item 1</a></li>
@@ -45,8 +60,15 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-4">
-                <Link to='/register' className="btn">Register</Link>
-                <Link to='/login' className="btn">Sign Up</Link>
+                {
+                    user ? <>
+                        <button onClick={handleLogOut} className='btn'>LogOut</button>
+                    </> : <>
+                        <Link to='/register' className="btn">Register</Link>
+                        <Link to='/login' className="btn">Sign Up</Link>
+                    </>
+                }
+
             </div>
         </div>
     );
