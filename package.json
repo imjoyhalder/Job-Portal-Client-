@@ -15,6 +15,7 @@
     "job-portal": "file:",
     "localforage": "^1.10.0",
     "lottie-react": "^2.4.1",
+    "lucide-react": "^0.511.0",
     "match-sorter": "^8.0.2",
     "motion": "^12.15.0",
     "react": "^19.1.0",
