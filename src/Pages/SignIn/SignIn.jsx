@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Lottie from 'lottie-react';
 import LoginLottieData from '../../assets/Lottie/login.json'
 import AuthContext from '../../Context/AuthContext/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../Shared/SocialLogin';
 
 
@@ -10,6 +10,9 @@ const SignIn = () => {
 
     const { userLogin } = useContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
+    const redirect_path = location?.state || '/'
+    console.log(redirect_path)
 
     const handleSignIn = e => {
         e.preventDefault()
@@ -20,7 +23,7 @@ const SignIn = () => {
         userLogin(email, password)
             .then(result => {
                 console.log("sign in", result.user)
-                navigate('/')
+                navigate(`${redirect_path}`)
             })
             .catch(error => {
                 console.log(error)
