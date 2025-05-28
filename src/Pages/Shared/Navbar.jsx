@@ -1,7 +1,8 @@
 import link from 'daisyui/components/link';
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import AuthContext from '../../Context/AuthContext/AuthContext';
+import jobIcon from '../../assets/Joblogo/icons8-job-application-64.png'
 
 const Navbar = () => {
 
@@ -20,8 +21,8 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
+        <li><NavLink>Home</NavLink></li>
+        <li><NavLink>Blog</NavLink></li>
     </>
 
     return (
@@ -50,7 +51,10 @@ const Navbar = () => {
                         }
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">
+                    <img className='w-12' src={jobIcon} alt="" />
+                    <h3 className="text-xl md:text-3xl"> Job Portal</h3>
+                </a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -62,7 +66,7 @@ const Navbar = () => {
             <div className="navbar-end gap-4">
                 {
                     user ? <>
-                        <button onClick={handleLogOut} className='btn'>LogOut</button>
+                        <button onClick={handleLogOut} className='btn'>Sign Out</button>
                     </> : <>
                         <Link to='/register' className="btn">Register</Link>
                         <Link to='/login' className="btn">Sign Up</Link>
