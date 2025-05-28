@@ -15,7 +15,7 @@ const HotJobs = () => {
     },[])
 
     return (
-        <div>
+        <div className='my-10'>
             <div className='grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 justify-center justify-items-center gap-4'>
                 {
                     jobs.map(job=> <JobCard key={job._id} job={job}></JobCard>)

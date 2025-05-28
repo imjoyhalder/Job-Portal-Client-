@@ -1,79 +1,91 @@
-import link from 'daisyui/components/link';
 import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import AuthContext from '../../Context/AuthContext/AuthContext';
-import jobIcon from '../../assets/Joblogo/icons8-job-application-64.png'
 import { LuLogOut } from "react-icons/lu";
+import { FaHome, FaBriefcase, FaUserCircle } from "react-icons/fa";
+import { MdContactMail } from "react-icons/md";
+import AuthContext from '../../Context/AuthContext/AuthContext';
+import jobIcon from '../../assets/Joblogo/icons8-job-application-64.png';
 
 const Navbar = () => {
+    const { user, userLogout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const { user, userLogout } = useContext(AuthContext)
-    const navigate = useNavigate()
-
-    const handleLogOut= ()=>{
+    const handleLogOut = () => {
         userLogout()
-        .then(res=>{
-            console.log(res)
-            navigate('/')
-        })
-        .catch(error=>{
-            console.log(error)
-        })
-    }
+            .then(() => {
+                navigate('/');
+            })
+            .catch(error => console.log(error));
+    };
 
-    const links = <>
-        <li><NavLink>Home</NavLink></li>
-        <li><NavLink>Blog</NavLink></li>
-    </>
+    const links = (
+        <>
+            <li>
+                <NavLink to="/" className="flex items-center gap-2">
+                    <FaHome /> Home
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/about" className="flex items-center gap-2">
+                    <FaUserCircle /> About Us
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/contact" className="flex items-center gap-2">
+                    <MdContactMail /> Contact
+                </NavLink>
+            </li>
+            {user && (
+                <li>
+                    <NavLink to="/myApplications" className="flex items-center gap-2">
+                        <FaBriefcase /> My Applications
+                    </NavLink>
+                </li>
+            )}
+        </>
+    );
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 shadow-md px-5 md:px-10">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                    <button tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
+                            className="h-6 w-6"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
-                    </div>
+                    </button>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        {
-                            links
-                        }
+                        className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow bg-base-100 rounded-box w-52">
+                        {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">
-                    <img className='w-12' src={jobIcon} alt="" />
-                    <h3 className="text-xl md:text-3xl"> Job Portal</h3>
-                </a>
+                <Link to="/" className="flex items-center gap-2 btn btn-ghost text-xl">
+                    <img className="w-10" src={jobIcon} alt="Job Portal Logo" />
+                    <span className="text-lg md:text-2xl font-bold">Job Portal</span>
+                </Link>
             </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    {
-                        links
-                    }
-                </ul>
-            </div>
-            <div className="navbar-end gap-4">
-                {
-                    user ? <>
-                        <button onClick={handleLogOut} className='btn btn-primary'>Sign Out<LuLogOut /></button>
-                    </> : <>
-                        <Link to='/register' className="btn">Register</Link>
-                        <Link to='/login' className="btn">Sign Up</Link>
-                    </>
-                }
 
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
+            </div>
+
+            <div className="navbar-end gap-3">
+                {user ? (
+                    <button onClick={handleLogOut} className="btn btn-outline btn-error flex items-center gap-2">
+                        Sign Out <LuLogOut />
+                    </button>
+                ) : (
+                    <>
+                        <Link to="/register" className="btn btn-outline">Register</Link>
+                        <Link to="/login" className="btn btn-primary">Sign In</Link>
+                    </>
+                )}
             </div>
         </div>
     );

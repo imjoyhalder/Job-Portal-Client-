@@ -1,12 +1,15 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../Hooks/UseAuth';
 import Swal from 'sweetalert2'
 
 const JobApply = () => {
 
-    const { user, } = useAuth()
-    const id = useParams()
+    const navigate = useNavigate()
+
+    const { user } = useAuth()
+    const { id } = useParams();
+    const cleanId = id.startsWith(":") ? id.slice(1) : id;
 
 
     const handleSubmit = e => {
@@ -18,7 +21,7 @@ const JobApply = () => {
         //console.log(linkedinUrl, githubUrl, resumeUrl)
 
         const jobApplication = {
-            job_id: id,
+            job_id: cleanId,
             applicant_email: user.email,
             linkedin,
             github,
@@ -41,6 +44,7 @@ const JobApply = () => {
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     })
+                    navigate('/myApplications')
                 }
             })
             .catch(error => {
@@ -55,32 +59,62 @@ const JobApply = () => {
 
     return (
 
-        <div className="card bg-base-100 mx-auto w-full  shadow-2xl">
-            <h1 className="text-5xl text-center font-bold">Apply Job and Good Luck!</h1>
-            <form onSubmit={handleSubmit} className="card-body">
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">LinkedIn URL</span>
+        <div className="max-w-xl my-10 mx-auto bg-white shadow-xl rounded-2xl p-8 space-y-6">
+            <h1 className="text-3xl font-bold text-center text-gray-800">
+                Apply for the Job 🎯
+            </h1>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        LinkedIn URL
                     </label>
-                    <input type="url" placeholder="LinkedIn URL" name='linkedinUrl' className="input input-bordered" required />
+                    <input
+                        type="url"
+                        name="linkedinUrl"
+                        placeholder="https://linkedin.com/in/yourname"
+                        className="w-full input input-bordered input-primary focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
                 </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">GitHub URL</span>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        GitHub URL
                     </label>
-                    <input type="url" name='githubUrl' placeholder="GitHub URL" className="input input-bordered" required />
+                    <input
+                        type="url"
+                        name="githubUrl"
+                        placeholder="https://github.com/yourname"
+                        className="w-full input input-bordered input-primary focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
                 </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Resume URL</span>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Resume URL
                     </label>
-                    <input type="url" name='resumeUrl' placeholder="Resume URL" className="input input-bordered" required />
+                    <input
+                        type="url"
+                        name="resumeUrl"
+                        placeholder="https://yourdomain.com/resume.pdf"
+                        className="w-full input input-bordered input-primary focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
                 </div>
-                <div className="form-control mt-6">
-                    <button className="btn btn-primary">Apply</button>
+
+                <div className="pt-4">
+                    <button
+                        type="submit"
+                        className="btn btn-primary w-full py-2 text-lg font-semibold rounded-xl hover:scale-105 transition-transform"
+                    >
+                        Submit Application 🚀
+                    </button>
                 </div>
             </form>
         </div>
+
 
     );
 };
