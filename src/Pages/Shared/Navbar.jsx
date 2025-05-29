@@ -21,29 +21,67 @@ const Navbar = () => {
     const links = (
         <>
             <li>
-                <NavLink to="/" className="flex items-center gap-2">
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        `flex items-center gap-2 relative group 
+          ${isActive ? 'text-blue-500 font-bold' : 'text-gray-200'}
+          transition-colors duration-500 ease-in-out`
+                    }
+                >
                     <FaHome /> Home
+                    <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                 </NavLink>
             </li>
+
             <li>
-                <NavLink to="/about" className="flex items-center gap-2">
+                <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                        `flex items-center gap-2 relative group 
+          ${isActive ? 'text-blue-500 font-bold' : 'text-gray-200'}
+          transition-colors duration-500 ease-in-out`
+                    }
+                >
                     <FaUserCircle /> About Us
+                    <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                 </NavLink>
             </li>
+
             <li>
-                <NavLink to="/contact" className="flex items-center gap-2">
+                <NavLink
+                    to="/contact"
+                    className={({ isActive }) =>
+                        `flex items-center gap-2 relative group 
+          ${isActive ? 'text-blue-500 font-bold' : 'text-gray-200'}
+          transition-colors duration-500 ease-in-out`
+                    }
+                >
                     <MdContactMail /> Contact
+                    <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                 </NavLink>
             </li>
+
             {user && (
                 <li>
-                    <NavLink to="/myApplications" className="flex items-center gap-2">
+                    <NavLink
+                        to="/myApplications"
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 relative group 
+            ${isActive ? 'text-blue-500 font-bold' : 'text-gray-200'}
+            transition-colors duration-500 ease-in-out`
+                        }
+                    >
                         <FaBriefcase /> My Applications
+                        <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                     </NavLink>
                 </li>
             )}
         </>
     );
+
+
+
 
     return (
         <div className="navbar bg-base-100 shadow-md px-5 md:px-10">
