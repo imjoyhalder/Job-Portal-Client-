@@ -5,6 +5,7 @@ import { FaHome, FaBriefcase, FaUserCircle } from "react-icons/fa";
 import { MdContactMail } from "react-icons/md";
 import AuthContext from '../../Context/AuthContext/AuthContext';
 import jobIcon from '../../assets/Joblogo/icons8-job-application-64.png';
+import { IoAddCircleSharp } from "react-icons/io5";
 
 const Navbar = () => {
     const { user, userLogout } = useContext(AuthContext);
@@ -58,6 +59,20 @@ const Navbar = () => {
                     }
                 >
                     <MdContactMail /> Contact
+                    <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                </NavLink>
+            </li>
+            
+            <li>
+                <NavLink
+                    to="/addJob"
+                    className={({ isActive }) =>
+                        `flex items-center gap-2 relative group 
+          ${isActive ? 'text-blue-500 font-bold' : 'text-gray-200'}
+          transition-colors duration-500 ease-in-out`
+                    }
+                >
+                    <IoAddCircleSharp /> Add Job
                     <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                 </NavLink>
             </li>

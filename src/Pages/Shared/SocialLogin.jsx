@@ -15,7 +15,7 @@ const SocialLogin = () => {
         loginWithGoogle()
         .then(res=>{
             console.log(res)
-            navigate(`${location?.state}`)
+            navigate(`${location?.state!=null? `${location?.state}`:'/'}`)
         })
         .then(error=>{
             console.log(error)
