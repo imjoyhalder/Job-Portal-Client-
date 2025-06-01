@@ -6,6 +6,7 @@ import AutoPlay from './AutoCarosule/AutoPlay';
 import GlobalExhibition from './GlobalExhibition/GlobalExhibition';
 import Partners from './Partners/Partners';
 import NewsFAQ from './NewsFAQ/NewsFAQ';
+import AboutDeji from './AboutDeji/AboutDeji';
 
 
 const Home = () => {
@@ -14,7 +15,8 @@ const Home = () => {
             <Banner></Banner>
             <CategoryCarousel></CategoryCarousel>
             <HotJobs></HotJobs>
-            <AutoPlay></AutoPlay>
+            <AboutDeji></AboutDeji>
+             <AutoPlay></AutoPlay>
             <GlobalExhibition></GlobalExhibition>
             <Partners></Partners>
             <NewsFAQ></NewsFAQ>
