@@ -1,26 +1,33 @@
+
 import React from 'react';
 import { MapPin, CalendarDays, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const JobCard = ({ job }) => {
+  if (!job) return null; // early return if job is not provided
+
   const {
-    title,
+    title = 'No Title',
     _id,
-    requirements,
-    location,
-    applicationDeadline,
-    salaryRange,
+    requirements = [],
+    location = 'Not specified',
+    applicationDeadline = 'N/A',
+    salaryRange = { min: 0, max: 0 },
     company_logo,
-    company,
-    jobType,
-    description,
+    company = 'Unknown Company',
+    jobType = 'N/A',
+    description = 'No description available.',
   } = job;
 
   return (
     <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-5 hover:shadow-xl transition-all duration-300">
       {/* Company Info */}
       <div className="flex items-center gap-4">
-        <img src={company_logo} alt={company} className="w-14 h-14 rounded-lg" />
+        <img
+          src={company_logo || 'https://via.placeholder.com/56'}
+          alt={company}
+          className="w-14 h-14 rounded-lg object-cover"
+        />
         <div>
           <h3 className="text-lg text-black font-semibold">{company}</h3>
           <div className="flex items-center text-sm text-gray-500">
@@ -45,7 +52,7 @@ const JobCard = ({ job }) => {
 
       {/* Description */}
       <p className="text-sm text-gray-700 mt-3">
-        {description.length > 100 ? description.slice(0, 100) + '...' : description}
+        {description.length > 120 ? `${description.slice(0, 120)}...` : description}
       </p>
 
       {/* Requirements */}
@@ -65,16 +72,22 @@ const JobCard = ({ job }) => {
         <div>
           <p className="text-sm text-gray-500">Salary Range</p>
           <p className="text-lg font-bold text-green-600">
-            ৳{salaryRange.min.toLocaleString()} - ৳{salaryRange.max.toLocaleString()}
+            ৳{salaryRange.min?.toLocaleString() || 0} - ৳{salaryRange.max?.toLocaleString() || 0}
           </p>
         </div>
-        <Link to={`/jobs/${_id}`} className="btn btn-primary text-white">Details</Link>
+        <Link
+          to={`/jobs/${_id}`}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        >
+          Details
+        </Link>
       </div>
     </div>
   );
 };
 
 export default JobCard;
+
 
 /**
  * {

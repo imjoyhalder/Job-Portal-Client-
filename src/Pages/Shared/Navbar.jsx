@@ -92,6 +92,21 @@ const Navbar = () => {
                     </NavLink>
                 </li>
             )}
+            {user && (
+                <li>
+                    <NavLink
+                        to="/myPostedJobs"
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 relative group 
+            ${isActive ? 'text-blue-500 font-bold' : 'text-gray-200'}
+            transition-colors duration-500 ease-in-out`
+                        }
+                    >
+                        <FaBriefcase /> My Posted Jobs
+                        <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                    </NavLink>
+                </li>
+            )}
         </>
     );
 
