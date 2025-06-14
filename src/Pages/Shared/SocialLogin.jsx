@@ -7,14 +7,14 @@ const SocialLogin = () => {
 
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location)
+    //console.log(location)
     const { loginWithGoogle } = useContext(AuthContext)
     
 
     const handleGoogleLogin = () =>{
         loginWithGoogle()
         .then(res=>{
-            console.log(res)
+            //console.log(res)
             navigate(`${location?.state!=null? `${location?.state}`:'/'}`)
         })
         .then(error=>{

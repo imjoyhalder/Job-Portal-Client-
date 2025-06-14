@@ -52,6 +52,7 @@ const MyPostedJobs = () => {
                                             </div>
                                         </div>
                                     </td>
+                                    
                                     <td>
                                         <p className=''>{job?.title}</p>
                                     </td>

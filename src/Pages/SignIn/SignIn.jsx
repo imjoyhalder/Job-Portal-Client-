@@ -4,6 +4,7 @@ import LoginLottieData from '../../assets/Lottie/login.json'
 import AuthContext from '../../Context/AuthContext/AuthContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../Shared/SocialLogin';
+import axios from 'axios';
 
 
 const SignIn = () => {
@@ -12,7 +13,7 @@ const SignIn = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const redirect_path = location?.state || '/'
-    console.log(redirect_path)
+    //console.log(redirect_path)
 
     const handleSignIn = e => {
         e.preventDefault()
@@ -22,7 +23,12 @@ const SignIn = () => {
 
         userLogin(email, password)
             .then(result => {
-                console.log("sign in", result.user)
+                //console.log("sign in", result.user.email)
+                const user = { email: email }
+                axios.post("http://localhost:3000/jwt", user)
+                    .then(res => {
+                        console.log(res.data)
+                    })
                 navigate(`${redirect_path}`)
             })
             .catch(error => {
