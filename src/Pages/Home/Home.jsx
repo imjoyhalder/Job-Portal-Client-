@@ -15,11 +15,11 @@ const Home = () => {
             <Banner></Banner>
             <CategoryCarousel></CategoryCarousel>
             <HotJobs></HotJobs>
-            <AboutDeji></AboutDeji>
-             <AutoPlay></AutoPlay>
+            {/* <AboutDeji></AboutDeji>
+            f<AutoPlay></AutoPlay>
             <GlobalExhibition></GlobalExhibition>
             <Partners></Partners>
-            <NewsFAQ></NewsFAQ>
+            <NewsFAQ></NewsFAQ> */}
         </div>
     );
 };
