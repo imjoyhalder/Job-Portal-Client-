@@ -24,9 +24,11 @@ const SignIn = () => {
                 const user = { email: result.user.email };
 
                 // Get JWT from backend
-                axios.post("http://localhost:3000/jwt", user)
+                axios.post("http://localhost:3000/jwt", user, {
+                    withCredentials: true
+                })
                     .then(res => {
-                        console.log("JWT response:", res);
+                        console.log("JWT response:", res.data);
                     });
 
                 Swal.fire({

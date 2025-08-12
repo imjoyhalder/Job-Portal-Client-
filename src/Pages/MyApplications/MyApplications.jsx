@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../Hooks/UseAuth';
+import axios from 'axios';
 
 const MyApplications = () => {
     const { user } = useAuth()
     const [jobs, setJobs] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/job-application?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setJobs(data)
-            })
+        // fetch(`http://localhost:3000/job-application?email=${user.email}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setJobs(data)
+        //     })
+        
+        axios.get(`http://localhost:3000/job-application?email=${user.email}`, 
+        {withCredentials: true}
+        ).then(res=>setJobs(res.data))
     }, [user.email])
+
+    
+    
 
     return (
         <div className="overflow-x-auto">
@@ -41,7 +49,7 @@ const MyApplications = () => {
                         <td>
                             <div className="flex items-center gap-3">
                                 <div className="avatar">
-                                    <div className="mask mask-squircle h-12 w-12">
+                                    <div className="w-12 h-12 mask mask-squircle">
                                         <img
                                             src={job.company_logo}
                                             alt="Avatar Tailwind CSS Component" />
@@ -60,7 +68,7 @@ const MyApplications = () => {
                         </td>
                         <td>Purple</td>
                         <th>
-                            <button className="btn bg-red-600 btn-xs">Delete</button>
+                            <button className="bg-red-600 btn btn-xs">Delete</button>
                         </th>
                     </tr>)
                     }
@@ -72,3 +80,35 @@ const MyApplications = () => {
 };
 
 export default MyApplications;
+// import React, { useEffect, useState } from 'react';
+// import useAuth from '../../Hooks/UseAuth';
+// import axios from 'axios';
+
+
+// const MyApplications = () => {
+
+//     const { user } = useAuth()
+//     const [jobs, setJobs] = useState([])
+
+//     axios.get(`http://localhost:3000/job-application?email=${user.email}`,
+//         { withCredentials: true }
+//     )
+//         .then(res => setJobs(res.data))
+    
+//     // useEffect(() => {
+//     //     fetch(`http://localhost:3000/job-application?email=${user.email}`)
+//     //         .then(res => res.json())
+//     //         .then(data => {
+//     //             setJobs(data)
+//     //         })
+//     // }, [user.email])
+    
+//     console.log(user)
+//     return (
+//         <div>
+//             <h1>My Application</h1>
+//         </div>
+//     );
+// };
+
+// export default MyApplications;

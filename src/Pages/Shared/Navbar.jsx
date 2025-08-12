@@ -62,7 +62,7 @@ const Navbar = () => {
                     <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                 </NavLink>
             </li>
-            
+
             <li>
                 <NavLink
                     to="/addJob"
@@ -114,13 +114,13 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-base-100 shadow-md px-5 md:px-10">
+        <div className="px-5 shadow-md navbar bg-base-100 md:px-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <button tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
+                            className="w-6 h-6"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -133,19 +133,19 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Link to="/" className="flex items-center gap-2 btn btn-ghost text-xl">
+                <Link to="/" className="flex items-center gap-2 text-xl btn btn-ghost">
                     <img className="w-10" src={jobIcon} alt="Job Portal Logo" />
-                    <span className="text-lg md:text-2xl font-bold">Job Portal</span>
+                    <span className="text-lg font-bold md:text-2xl">Job Portal</span>
                 </Link>
             </div>
 
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
+            <div className="hidden navbar-center lg:flex">
+                <ul className="gap-2 px-1 menu menu-horizontal">{links}</ul>
             </div>
 
-            <div className="navbar-end gap-3">
+            <div className="gap-3 navbar-end">
                 {user ? (
-                    <button onClick={handleLogOut} className="btn btn-outline btn-error flex items-center gap-2">
+                    <button onClick={handleLogOut} className="flex items-center gap-2 btn btn-outline btn-error">
                         Sign Out <LuLogOut />
                     </button>
                 ) : (
