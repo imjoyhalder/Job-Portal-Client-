@@ -13,6 +13,7 @@ const SignIn = () => {
     const location = useLocation();
     const redirect_path = location?.state || '/';
 
+    const hello  = 'hello'
     const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
